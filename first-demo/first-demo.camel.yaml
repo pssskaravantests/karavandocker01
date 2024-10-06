@@ -1,0 +1,26 @@
+- route:
+    id: route-b8ed
+    nodePrefixId: route-a6b
+    from:
+      id: from-6ac6
+      uri: kamelet:timer-source
+      parameters:
+        message: Hello Karavan Docker
+      steps:
+        - to:
+            id: to-4428
+            description: First Logger Step
+            uri: log
+            parameters:
+              loggerName: first-logger-step
+        - process:
+            id: process-d415
+            description: Custom Java Processor
+            disabled: false
+            ref: CustomProcessor
+        - to:
+            id: to-5038
+            description: Logger Step after Custom Processor
+            uri: log
+            parameters:
+              loggerName: second-logger-step
