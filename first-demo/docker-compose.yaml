@@ -1,0 +1,8 @@
+services:
+  first-demo:
+    image: first-demo
+    restart: always
+    ports:
+      - "8081:8080"
+    networks:
+      - karavan
