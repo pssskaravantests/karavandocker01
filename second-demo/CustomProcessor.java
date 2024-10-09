@@ -8,7 +8,7 @@ import org.apache.camel.Processor;
 public class CustomProcessor implements Processor {
 
     public void process(Exchange exchange) throws Exception {
-        com.decodedbytes.beans.SampleBean sampleBean = new com.decodedbytes.beans.SampleBean
+        com.decodedbytes.beans.SampleBean sampleBean = new com.decodedbytes.beans.SampleBean(
                 "name",
                 "houseNumber",
                 "city",
