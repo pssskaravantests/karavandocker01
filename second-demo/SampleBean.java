@@ -1,5 +1,6 @@
 public class SampleBean {
 
+    // Comentario
     private String name;
     private String houseNumber;
     private String city;
