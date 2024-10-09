@@ -1,5 +1,3 @@
-package com.decodedbytes.beans;
-
 public class SampleBean {
 
     private String name;
@@ -67,11 +65,11 @@ public class SampleBean {
     @Override
     public String toString() {
         return "SampleBean{" +
-                "\nname='" + name + '\'' +
-                ",\nhouseNumber='" + houseNumber + '\'' +
-                ",\ncity='" + city + '\'' +
-                ",\nprovince='" + province + '\'' +
-                ",\npostalCode='" + postalCode + '\'' +
-                "\n}";
+                "\n\tname='" + name + '\'' +
+                ",\n\thouseNumber='" + houseNumber + '\'' +
+                ",\n\tcity='" + city + '\'' +
+                ",\n\tprovince='" + province + '\'' +
+                ",\n\tpostalCode='" + postalCode + '\'' +
+                "\n\t}";
     }
 }
