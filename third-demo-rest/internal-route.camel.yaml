@@ -8,6 +8,10 @@
       parameters:
         name: internal-route
       steps:
+        - process:
+            id: process-25ad
+            description: Extract SSF Identificator from Body
+            ref: CustomProcessor
         - setProperty:
             id: setProperty-e7fc
             description: Set SSF Identificator
