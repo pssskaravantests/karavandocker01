@@ -3,6 +3,8 @@ import org.apache.camel.Configuration;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 
+import java.util.HashMap;
+
 @Configuration
 @BindToRegistry("CustomProcessor")
 public class CustomProcessor implements Processor {
