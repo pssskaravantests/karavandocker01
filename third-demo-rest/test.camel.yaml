@@ -1,0 +1,16 @@
+- route:
+    id: route-bee1
+    nodePrefixId: route-9c1
+    from:
+      id: from-aa07
+      description: Timer trigger
+      uri: timer
+      parameters:
+        timerName: Trigger
+        repeatCount: "2"
+      steps:
+        - to:
+            id: to-00c6
+            uri: direct
+            parameters:
+              name: internal-route
