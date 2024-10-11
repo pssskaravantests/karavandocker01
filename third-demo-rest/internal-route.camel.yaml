@@ -26,6 +26,26 @@
                 expression: >-
                   ${properties:${exchangeProperty.selectedSSFIdentificator}.clientCredentials}
                 resultType: java.lang.String
+        - setProperty:
+            id: setProperty-e435
+            description: Token URL Segment
+            name: tokenUrl
+            expression:
+              simple:
+                id: simple-47a9
+                expression: >-
+                  ${properties:${exchangeProperty.selectedSSFIdentificator}.tokenUrl}
+                resultType: java.lang.String
+        - setProperty:
+            id: setProperty-e436
+            description: Company Credentials Segment
+            name: companyCredentials
+            expression:
+              simple:
+                id: simple-47a0
+                expression: >-
+                  ${properties:${exchangeProperty.selectedSSFIdentificator}.companyCredentials}
+                resultType: java.lang.String
         - to:
             id: to-b1e5
             description: Log Properties
