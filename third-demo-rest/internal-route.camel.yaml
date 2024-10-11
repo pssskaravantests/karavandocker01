@@ -1,0 +1,24 @@
+- route:
+    id: route-e2f2
+    nodePrefixId: route-dc2
+    from:
+      id: from-bbdd
+      description: Internal Route
+      uri: direct
+      parameters:
+        name: internal-route
+      steps:
+        - setProperty:
+            id: setProperty-e434
+            description: Client Credentials Segment
+            name: clientCredentials
+            expression:
+              simple:
+                id: simple-47a8
+                expression: "{{NTT_T1_Local_SFSF_Romania.clientCredentials}}"
+                resultType: java.lang.String
+        - to:
+            id: to-b1e5
+            uri: log
+            parameters:
+              showProperties: true
