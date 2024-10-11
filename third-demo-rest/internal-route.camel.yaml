@@ -9,13 +9,22 @@
         name: internal-route
       steps:
         - setProperty:
+            id: setProperty-e7fc
+            description: Set SSF Identificator
+            name: selectedSSFIdentificator
+            expression:
+              constant:
+                id: constant-65d3
+                expression: NTT_T1_Local_SFSF_Romania
+        - setProperty:
             id: setProperty-e434
             description: Client Credentials Segment
             name: clientCredentials
             expression:
               simple:
                 id: simple-47a8
-                expression: "{{NTT_T1_Local_SFSF_Romania.clientCredentials}}"
+                expression: >-
+                  {{${exchangeProperty.selectedSSFIdentificator}.clientCredentials}}
                 resultType: java.lang.String
         - to:
             id: to-b1e5
