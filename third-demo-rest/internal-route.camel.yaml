@@ -24,7 +24,7 @@
               simple:
                 id: simple-47a8
                 expression: >-
-                  {{${exchangeProperty.selectedSSFIdentificator}.clientCredentials}}
+                  ${properties:${exchangeProperty.selectedSSFIdentificator}.clientCredentials}
                 resultType: java.lang.String
         - to:
             id: to-b1e5
