@@ -9,6 +9,14 @@
         timerName: Trigger
         repeatCount: "2"
       steps:
+        - setProperty:
+            id: setProperty-a83e
+            description: Set Property SSF Alias
+            name: selectedSSFIdentificator
+            expression:
+              constant:
+                id: constant-8a3c
+                expression: NTT_T1_Local_SFSF_Romania
         - to:
             id: to-00c6
             uri: direct
