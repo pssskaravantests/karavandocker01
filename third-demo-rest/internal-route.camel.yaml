@@ -13,14 +13,6 @@
             description: Extract SSF Identificator from Body
             ref: CustomProcessor
         - setProperty:
-            id: setProperty-e7fc
-            description: Set SSF Identificator
-            name: selectedSSFIdentificator
-            expression:
-              constant:
-                id: constant-65d3
-                expression: NTT_T1_Local_SFSF_Romania
-        - setProperty:
             id: setProperty-e434
             description: Client Credentials Segment
             name: clientCredentials
