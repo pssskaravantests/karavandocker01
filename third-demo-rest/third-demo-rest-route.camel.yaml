@@ -1,0 +1,10 @@
+- rest:
+    id: rest-de25
+    post:
+      - id: post-9e1b
+        description: Get OAuth2 token from SSF Acronim Selected
+        path: /SSFOAuth2/token
+        to: direct:internal-route
+        consumes: application/x-www-form-urlencoded
+        produces: application/json
+        bindingMode: "off"
