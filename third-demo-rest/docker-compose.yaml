@@ -1,0 +1,8 @@
+services:
+  third-demo-rest:
+    image: third-demo-rest
+    restart: always
+    ports:
+      - "8083:8080"
+    networks:
+      - karavan
