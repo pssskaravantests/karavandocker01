@@ -19,6 +19,8 @@
                 resultType: java.lang.String
         - to:
             id: to-b1e5
+            description: Log Properties
             uri: log
             parameters:
               showProperties: true
+              loggerName: properties-logger
