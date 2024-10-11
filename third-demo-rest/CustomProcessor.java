@@ -21,7 +21,7 @@ public class CustomProcessor implements Processor {
 
             // Mostrar valores
             System.out.println("selectedSSFIdentificator[" + selectedSSFIdentificator + "]");
-            exchange.getIn().setProperty("selectedSSFIdentificator", selectedSSFIdentificator);
+            exchange.setProperty("selectedSSFIdentificator", selectedSSFIdentificator);
         } else {
             System.out.println("El cuerpo está vacío (null).");
         }
