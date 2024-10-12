@@ -83,7 +83,8 @@
             uri: log
             parameters:
               loggerName: log-data-before-post-1
-              showAllProperties: true
+              showAllProperties: Content-type
+              showCachedStreams: false
         - to:
             id: to-9c12
             description: Get ASSERTION data
