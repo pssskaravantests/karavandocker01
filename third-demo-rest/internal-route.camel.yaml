@@ -83,6 +83,19 @@
               showAllProperties: false
               showCachedStreams: true
               showCaughtException: true
+        - script:
+            id: script-59b2
+            description: Assure proper Request Headers
+            expression:
+              groovy:
+                id: groovy-5861
+                expression: >
+                  exchange.setProperty('Content-Type',
+                  'application/x-www-form-urlencoded')
+
+                  exchange.setProperty('Accept', '*/*')
+
+                  exchange.setProperty('Accept-Encoding', 'deflate')
         - setProperty:
             id: setProperty-7065
             description: Set Fake Body With Groovy
