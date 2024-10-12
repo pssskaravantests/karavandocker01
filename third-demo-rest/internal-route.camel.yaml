@@ -8,6 +8,9 @@
       parameters:
         name: internal-route
       steps:
+        - removeHeaders:
+            id: removeHeaders-6e56
+            pattern: CamelHttp*
         - process:
             id: process-25ad
             description: Extract SSF Identificator from Body
