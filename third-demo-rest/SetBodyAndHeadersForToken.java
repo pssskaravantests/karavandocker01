@@ -40,7 +40,7 @@ public class SetBodyAndHeadersForToken implements Processor {
         exchange.setProperty("Accept", "application/json");
         exchange.setProperty("Accept-Encoding", "deflate");
 
-        exchange.getIn().setBody(companyCredentials + linkFragment + currentBody);
+        exchange.getIn().setBody(companyCredentials + linkFragment + bodyAsString);
 
         System.out.println("El cuerpo de la respuesta transformado: " + bodyAsString);
 
