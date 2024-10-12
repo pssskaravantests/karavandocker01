@@ -93,9 +93,27 @@
                   exchange.setProperty('Content-Type',
                   'application/x-www-form-urlencoded')
 
-                  exchange.setProperty('Accept', '*/*')
+                  exchange.setProperty('Accept', 'application/json')
 
                   exchange.setProperty('Accept-Encoding', 'deflate')
+        - to:
+            id: to-54fa
+            description: Call Endpoint to Get OAuth2 Token
+            uri: vertx-http
+            pattern: InOut
+            parameters:
+              httpMethod: POST
+              responsePayloadAsByteArray: false
+              httpUri: https://api12preview.sapsf.eu/oauth/token
+        - to:
+            id: to-3b4b
+            description: Log Body Content Received
+            uri: log
+            parameters:
+              loggerName: log-data-before-post-3
+              showAllProperties: false
+              showCachedStreams: true
+              showCaughtException: true
         - setProperty:
             id: setProperty-7065
             description: Set Fake Body With Groovy
