@@ -12,10 +12,10 @@ public class SetBodyAndHeadersForToken implements Processor {
 
     public void process(Exchange exchange) throws Exception {
         // Obtener el valor de la Propiedad 'companyCredentials'
-        String companyCredentials = exchange.getProperty("companyCredentials");
+        String companyCredentials = exchange.getProperty("companyCredentials").toString();
         
         // Establecer el fragmento de enlace
-        Sring linkFragment = "&grant_type=urn:ietf:params:oauth:grant-type:saml2-bearer&assertion=";
+        String linkFragment = "&grant_type=urn:ietf:params:oauth:grant-type:saml2-bearer&assertion=";
 
         // Obtener el cuerpo del mensaje como objeto
         Object body = exchange.getIn().getBody();
