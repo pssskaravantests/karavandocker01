@@ -49,6 +49,7 @@
             parameters:
               showProperties: true
               loggerName: properties-logger
+              showAllProperties: true
         - process:
             id: process-cc7a
             description: Set Body as concatenation of ClientID + TokenURL
@@ -60,6 +61,7 @@
             parameters:
               loggerName: log-data-before-get-assertion
               showCachedStreams: false
+              showAllProperties: true
         - to:
             id: to-54f9
             description: Call Endpoint to Get ASSERTION data
@@ -68,7 +70,6 @@
             parameters:
               httpMethod: POST
               responsePayloadAsByteArray: false
-              httpUri: https://api12preview.sapsf.eu/oauth/idp
         - to:
             id: to-3b4a
             description: Log Properties and Body Content
