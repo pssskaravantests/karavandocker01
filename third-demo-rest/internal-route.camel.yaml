@@ -67,8 +67,8 @@
             pattern: InOut
             parameters:
               httpMethod: POST
-              httpUri: https://api12preview.sapsf.eu/oauth/idp
               responsePayloadAsByteArray: false
+              httpUri: api12preview.sapsf.eu:443
         - to:
             id: to-3b4a
             description: Log Properties and Body Content
