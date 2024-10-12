@@ -83,6 +83,9 @@
               showAllProperties: false
               showCachedStreams: true
               showCaughtException: true
+        - removeHeaders:
+            id: removeHeaders-6e57
+            pattern: CamelHttp*
         - process:
             id: process-6f8e
             description: Assure properBody & Request Headers before Get Token
@@ -93,6 +96,7 @@
             uri: log
             parameters:
               loggerName: logger-step-before-get-token
+              showAllProperties: true
         - to:
             id: to-54fa
             description: Call Endpoint to Get OAuth2 Token
