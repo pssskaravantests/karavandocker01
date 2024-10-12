@@ -105,7 +105,7 @@
             parameters:
               httpMethod: POST
               responsePayloadAsByteArray: false
-              httpUri: http://10.0.2.15:8085
+              httpUri: https://api12preview.sapsf.eu/oauth/token
         - to:
             id: to-3b4b
             description: Log Body Content Received
