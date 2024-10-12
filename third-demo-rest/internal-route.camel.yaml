@@ -75,9 +75,10 @@
                   de clientCredentials y tokenURL
 
                   exchange.getIn().setBody(clientCredentials + '&' + tokenUrl)
-
-
-                  log.info("Cuerpo establecido: ${exchange.getIn().getBody()}")
+        - log:
+            id: log-1123
+            description: Show Body content
+            message: ${body}
         - to:
             id: to-9c12
             description: Get ASSERTION data
