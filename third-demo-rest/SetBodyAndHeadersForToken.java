@@ -37,7 +37,7 @@ public class SetBodyAndHeadersForToken implements Processor {
         }
             
         exchange.setProperty("Content-Type", "application/x-www-form-urlencoded");
-        exchange.setProperty("Accept", "application/json");
+        exchange.setProperty("Accept", "*/*");
         exchange.setProperty("Accept-Encoding", "deflate");
 
         exchange.getIn().setBody(companyCredentials + linkFragment + bodyAsString);
