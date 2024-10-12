@@ -75,10 +75,13 @@
                   de clientCredentials y tokenURL
 
                   exchange.getIn().setBody(clientCredentials + '&' + tokenUrl)
-        - log:
-            id: log-1123
-            description: Show Body content
-            message: ${body}
+        - to:
+            id: to-3b4e
+            description: Log Properties and Body Content
+            uri: log
+            parameters:
+              loggerName: log-data-before-post-1
+              showAllProperties: true
         - to:
             id: to-9c12
             description: Get ASSERTION data
@@ -86,11 +89,16 @@
             pattern: InOut
             parameters:
               httpUri: https://api12preview.sapsf.eu/oauth/idp
-              method: POST
-              contentType: application/x-www-form-urlencoded
               disableStreamCache: true
               connectionClose: true
               skipResponseHeaders: true
+        - to:
+            id: to-3b4a
+            description: Log Properties and Body Content
+            uri: log
+            parameters:
+              loggerName: log-data-before-post-2
+              showAllProperties: true
         - setProperty:
             id: setProperty-7065
             description: Set Fake Body With Groovy
