@@ -96,6 +96,7 @@
               connectionClose: true
               skipResponseHeaders: true
               httpMethod: POST
+              bridgeEndpoint: true
         - to:
             id: to-3b4a
             description: Log Properties and Body Content
