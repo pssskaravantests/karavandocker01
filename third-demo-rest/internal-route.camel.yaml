@@ -70,6 +70,7 @@
             parameters:
               httpMethod: POST
               responsePayloadAsByteArray: false
+              httpUri: https://api12preview.sapsf.eu/oauth/idp/
         - to:
             id: to-3b4a
             description: Log Properties and Body Content
