@@ -73,7 +73,7 @@
             parameters:
               httpMethod: POST
               responsePayloadAsByteArray: false
-              httpUri: https://api12preview.sapsf.eu/oauth/idp
+              httpUri: http://10.0.2.15:8085
         - to:
             id: to-3b4a
             description: Log Properties and Body Content
