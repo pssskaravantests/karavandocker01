@@ -83,7 +83,7 @@
             uri: log
             parameters:
               loggerName: log-data-before-post-1
-              showAllProperties: Content-type
+              showAllProperties: false
               showCachedStreams: false
         - to:
             id: to-9c12
@@ -95,6 +95,7 @@
               disableStreamCache: true
               connectionClose: true
               skipResponseHeaders: true
+              httpMethod: POST
         - to:
             id: to-3b4a
             description: Log Properties and Body Content
