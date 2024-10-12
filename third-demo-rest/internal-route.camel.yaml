@@ -74,7 +74,9 @@
                   // Establecer el cuerpo (body) del mensaje como concatenación
                   de clientCredentials y tokenURL
 
-                  exchange.getIn().setBody(clientCredentials + '&' + tokenUrl)
+                  String bodyContent = clientCredentials + "&" + tokenUrl
+
+                  exchange.getIn().setBody(bodyContent)
         - to:
             id: to-3b4e
             description: Log Properties and Body Content
@@ -88,7 +90,7 @@
             uri: https
             pattern: InOut
             parameters:
-              httpUri: https://api12preview.sapsf.eu/oauth/idp
+              httpUri: api12preview.sapsf.eu/oauth/idp
               disableStreamCache: true
               connectionClose: true
               skipResponseHeaders: true
