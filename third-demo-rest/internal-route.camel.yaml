@@ -49,6 +49,47 @@
             parameters:
               showProperties: true
               loggerName: properties-logger
+        - script:
+            id: script-3ec8
+            description: Set Body as concatenation of ClientID + TokenURL
+            expression:
+              groovy:
+                id: groovy-a095
+                expression: >-
+                  // Obtener el valor de la propiedades: tokenUrl y
+                  clientCredentials
+
+                  def clientCredentials =
+                  exchange.getProperty('clientCredentials')
+
+                  def tokenUrl = exchange.getProperty('tokenUrl')
+
+
+                  // asegurar el valor de la cabecera Content-Type
+
+                  exchange.setProperty('Content-Type',
+                  'application/x-www-form-urlencoded')
+
+
+                  // Establecer el cuerpo (body) del mensaje como concatenación
+                  de clientCredentials y tokenURL
+
+                  exchange.getIn().setBody(clientCredentials + '&' + tokenUrl)
+
+
+                  log.info("Cuerpo establecido: ${exchange.getIn().getBody()}")
+        - to:
+            id: to-9c12
+            description: Get ASSERTION data
+            uri: https
+            pattern: InOut
+            parameters:
+              httpUri: https://api12preview.sapsf.eu/oauth/idp
+              method: POST
+              contentType: application/x-www-form-urlencoded
+              disableStreamCache: true
+              connectionClose: true
+              skipResponseHeaders: true
         - setProperty:
             id: setProperty-7065
             description: Set Fake Body With Groovy
