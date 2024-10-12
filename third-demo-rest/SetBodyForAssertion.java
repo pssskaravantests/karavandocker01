@@ -16,6 +16,7 @@ public class SetBodyForAssertion implements Processor {
         // asegurar el valor de la cabecera Content-Type
         exchange.setProperty("Content-Type", "application/x-www-form-urlencoded");
         exchange.setProperty("CamelHttpUri", "https://api12preview.sapsf.eu/oauth/idp");
-        exchange.getIn().setBody(clientCredentials + "&" + tokenUrl);
+        String newBodyContent = clientCredentials + "&" + tokenUrl;
+        exchange.getIn().setBody(newBodyContent);
     }
 }
