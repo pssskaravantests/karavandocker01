@@ -85,7 +85,7 @@
               showCaughtException: true
         - removeHeaders:
             id: removeHeaders-6e57
-            pattern: CamelHttp*
+            pattern: "*"
         - process:
             id: process-6f8e
             description: Assure properBody & Request Headers before Get Token
@@ -105,7 +105,7 @@
             parameters:
               httpMethod: POST
               responsePayloadAsByteArray: false
-              httpUri: https://api12preview.sapsf.eu/oauth/token
+              httpUri: http://10.0.2.15:8085
         - to:
             id: to-3b4b
             description: Log Body Content Received
