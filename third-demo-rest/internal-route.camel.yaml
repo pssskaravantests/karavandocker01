@@ -98,8 +98,8 @@
               disableStreamCache: true
               connectionClose: true
               skipResponseHeaders: true
-              httpMethod: POST
               bridgeEndpoint: true
+              httpMethod: POST
         - to:
             id: to-3b4a
             description: Log Properties and Body Content
