@@ -37,9 +37,9 @@ public class SetBodyAndHeadersForToken implements Processor {
         }
 
         exchange.setProperty("CamelHttpUri", "https://api12preview.sapsf.eu/oauth/token");    
-        exchange.setProperty("Content-Type", "application/x-www-form-urlencoded");
-        exchange.setProperty("Accept", "*/*");
-        exchange.setProperty("Accept-Encoding", "deflate");
+        exchange.getIn().setHeader("Content-Type", "application/x-www-form-urlencoded");
+        exchange.getIn().setHeader("Accept", "*/*");
+        exchange.getIn().setHeader("Accept-Encoding", "deflate");
 
         exchange.getIn().setBody(companyCredentials + linkFragment + bodyAsString);
 
