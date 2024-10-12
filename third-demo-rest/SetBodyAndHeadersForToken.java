@@ -12,7 +12,7 @@ public class SetBodyAndHeadersForToken implements Processor {
 
     public void process(Exchange exchange) throws Exception {
         // Obtener el valor de la Propiedad 'companyCredentials'
-        String companyCredentials = exchange.getProperty('companyCredentials');
+        String companyCredentials = exchange.getProperty("companyCredentials");
         
         // Establecer el fragmento de enlace
         Sring linkFragment = "&grant_type=urn:ietf:params:oauth:grant-type:saml2-bearer&assertion=";
