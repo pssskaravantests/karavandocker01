@@ -76,11 +76,13 @@
               httpUri: https://api12preview.sapsf.eu/oauth/idp
         - to:
             id: to-3b4a
-            description: Log Properties and Body Content
+            description: Log Body Content Received
             uri: log
             parameters:
               loggerName: log-data-before-post-2
-              showAllProperties: true
+              showAllProperties: false
+              showCachedStreams: false
+              showCaughtException: true
         - setProperty:
             id: setProperty-7065
             description: Set Fake Body With Groovy
