@@ -89,13 +89,26 @@
             expression:
               groovy:
                 id: groovy-5861
-                expression: >
+                expression: >-
+
+                  String companyCredentials =
+                  exchange.getProperty('companyCredentials')
+
+                  String currentBody = exchange.getIn().getBody()
+
+
                   exchange.setProperty('Content-Type',
                   'application/x-www-form-urlencoded')
 
                   exchange.setProperty('Accept', 'application/json')
 
                   exchange.setProperty('Accept-Encoding', 'deflate')
+
+
+                  exchange.getIn().setBody(companyCredentials +
+                  "&grant_type=urn:ietf:params:oauth:grant-type:saml2-bearer&assertion=
+
+                  " + currentBody)
         - to:
             id: to-54fa
             description: Call Endpoint to Get OAuth2 Token
