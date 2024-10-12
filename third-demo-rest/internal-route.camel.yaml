@@ -83,31 +83,10 @@
               showAllProperties: false
               showCachedStreams: true
               showCaughtException: true
-        - script:
-            id: script-59b2
-            description: Assure proper Request Headers
-            expression:
-              groovy:
-                id: groovy-5861
-                expression: >-
-
-                  String companyCredentials =
-                  exchange.getProperty('companyCredentials')
-
-                  String currentBody = exchange.getIn().getBody()
-
-
-                  exchange.setProperty('Content-Type',
-                  'application/x-www-form-urlencoded')
-
-                  exchange.setProperty('Accept', 'application/json')
-
-                  exchange.setProperty('Accept-Encoding', 'deflate')
-
-
-                  exchange.getIn().setBody(companyCredentials +
-                  '&grant_type=urn:ietf:params:oauth:grant-type:saml2-bearer&assertion='
-                  + currentBody)
+        - process:
+            id: process-6f8e
+            description: Assure properBody & Request Headers before Get Token
+            ref: SetBodyAndHeadersForToken
         - to:
             id: to-d931
             description: Log Body Content before Get Token
