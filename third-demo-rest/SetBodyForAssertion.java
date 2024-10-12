@@ -10,11 +10,11 @@ public class SetBodyForAssertion implements Processor {
     public void process(Exchange exchange) throws Exception {
 
         // Obtener el valor de la propiedades: tokenUrl y clientCredentials
-        String clientCredentials = exchange.getProperty("clientCredentials")
-        String tokenUrl = exchange.getProperty("tokenUrl")
+        String clientCredentials = exchange.getProperty("clientCredentials");
+        String tokenUrl = exchange.getProperty("tokenUrl");
 
         // asegurar el valor de la cabecera Content-Type
-        exchange.setProperty("Content-Type", "application/x-www-form-urlencoded")
+        exchange.setProperty("Content-Type", "application/x-www-form-urlencoded");
         exchange.getIn().setBody(clientCredentials + "&" + tokenUrl);
     }
 }
