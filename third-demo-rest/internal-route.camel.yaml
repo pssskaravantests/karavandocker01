@@ -49,3 +49,12 @@
             parameters:
               showProperties: true
               loggerName: properties-logger
+        - setProperty:
+            id: setProperty-7065
+            description: Set Fake Body With Groovy
+            name: set-fake-response-body
+            expression:
+              groovy:
+                id: groovy-c51c
+                expression: >-
+                  exchange.getIn().setBody("{"access_token":"eyJ0b2tlbkNvbnRlbnQiOnsiYXBpS2V5IjoiWVdRellUUm1Oell6WkdFeU9HSmpOVFJoTldVNVltVTBORFk0TlEiLCJzZlByaW5jaXBsZSI6ImFkbWlubnR0ZW1lYWwjRElWI0MwMDA5NDE3NDkxVDEiLCJpc3N1ZWRGb3IiOiJTRlNGTG9jYWxSb21hbmlhVDFfRUhVQlQxIiwic2NvcGUiOiIiLCJpc3N1ZWRBdCI6MTcyODczNDkwNTYxMSwiZXhwaXJlc0F0IjoxNzI4ODIxMzA1NjExfSwic2lnbmF0dXJlIjoiYjRuN3hLUzFDVXVYMmtwN2JMSUdCSkpCQ0tBK1M1N1A5QjNDODR0YzdsVUl3akthZE9nSm1ZTkF1V1VPMitxaGVYY3FKQVVKVERZUWxxUlBlTDhxL1I4NXpwMGRObk1JSjJORzhWbk12UnUxV202STFBSlVTV3JlZy9xa2Nwam54Y2VlU1ZLb2tVanIxMjlaZjA5Qk1ZelNFRi92V3MvTVNaOCs3T1JTUTYwPSJ9","token_type":"Bearer","expires_in":86399}")
