@@ -106,9 +106,14 @@
 
 
                   exchange.getIn().setBody(companyCredentials +
-                  "&grant_type=urn:ietf:params:oauth:grant-type:saml2-bearer&assertion=
-
-                  " + currentBody)
+                  '&grant_type=urn:ietf:params:oauth:grant-type:saml2-bearer&assertion='
+                  + currentBody)
+        - to:
+            id: to-d931
+            description: Log Body Content before Get Token
+            uri: log
+            parameters:
+              loggerName: logger-step-before-get-token
         - to:
             id: to-54fa
             description: Call Endpoint to Get OAuth2 Token
