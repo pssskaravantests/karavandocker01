@@ -81,7 +81,7 @@
             parameters:
               loggerName: log-data-before-post-2
               showAllProperties: false
-              showCachedStreams: false
+              showCachedStreams: true
               showCaughtException: true
         - setProperty:
             id: setProperty-7065
