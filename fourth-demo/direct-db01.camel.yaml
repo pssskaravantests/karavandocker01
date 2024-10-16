@@ -12,7 +12,7 @@
             id: to-1f92
             description: MySql Sink
             uri: kamelet:mysql-sink
-            pattern: InOut
+            pattern: InOnly
             parameters:
               serverName: localhost
               serverPort: 3306
@@ -26,3 +26,9 @@
                     'Bearer',
                     86399
                 );
+        - setBody:
+            id: setBody-c74d
+            expression:
+              constant:
+                id: constant-e59a
+                expression: "\"OK\""
