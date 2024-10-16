@@ -14,7 +14,7 @@
             uri: kamelet:mysql-sink
             pattern: InOnly
             parameters:
-              serverName: localhost
+              serverName: vbxzr172
               serverPort: 3306
               username: devel1
               password: Kapilavastu24..

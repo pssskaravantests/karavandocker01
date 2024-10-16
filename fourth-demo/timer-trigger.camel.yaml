@@ -9,6 +9,12 @@
         timerName: timer-one
         repeatCount: "1"
       steps:
+        - setBody:
+            id: setBody-7c83
+            expression:
+              constant:
+                id: constant-315e
+                expression: "\"Hola Mundo\""
         - to:
             id: to-24da
             description: Call Sql insert
