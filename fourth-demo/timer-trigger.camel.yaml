@@ -1,0 +1,11 @@
+- route:
+    id: route-62c4
+    nodePrefixId: route-c83
+    from:
+      id: from-4370
+      description: Timer 1 event only
+      uri: timer
+      parameters:
+        timerName: timer-one
+        repeatCount: "1"
+    to: direct:direct-insert-into-table
