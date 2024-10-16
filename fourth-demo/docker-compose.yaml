@@ -1,0 +1,8 @@
+services:
+  fourth-demo:
+    image: fourth-demo
+    restart: always
+    ports:
+      - "8084:8080"
+    networks:
+      - karavan

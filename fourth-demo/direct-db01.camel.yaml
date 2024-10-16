@@ -1,0 +1,28 @@
+- route:
+    id: route-3194
+    nodePrefixId: route-68f
+    from:
+      id: from-7f71
+      description: direct-insert-into-table
+      uri: direct
+      parameters:
+        name: direct-insert-into-table
+      steps:
+        - to:
+            id: to-1f92
+            description: MySql Sink
+            uri: kamelet:mysql-sink
+            pattern: InOut
+            parameters:
+              serverName: localhost
+              serverPort: 3306
+              username: devel1
+              password: Kapilavastu24..
+              databaseName: testtokens
+              query: |-
+                INSERT INTO tokens (access_token, token_type, expires_in) 
+                VALUES (
+                    'eyJ0b2tlbkNvbnRlbnQiOnsiYXBpS2V5IjoiWVdRellUUm1Oell6WkdFeU9HSmpOVFJoTldVNVltVTBORFk0TlEiLCJzZlByaW5jaXBsZSI6ImFkbWlubnR0ZW1lYWwjRElWI0MwMDA5NDE3NDkxVDEiLCJpc3N1ZWRGb3IiOiJTRlNGTG9jYWxSb21hbmlhVDFfRUhVQlQxIiwic2NvcGUiOiIiLCJpc3N1ZWRBdCI6MTcyOTA3NTQ1NDIxNCwiZXhwaXJlc0F0IjoxNzI5MTYxODU0MjE0fSwic2lnbmF0dXJlIjoiR2U0dTNVRlVxaFFyMWRaQm1SOGZjUVI2WkUrUUJMdW51NnI0bXFJQTJHaDMxbEVnNXhnSGkva3F0MmlleWF1YTU5NXdHKzZldjRVSk1lN3dDbVpPWStJS2ZQRkFsaVBPNWJKZkwvekl0SEM1cUdsMEI5cHMzV1BMaGFCMnZtWFNvSDhleG12MFN4ZGk5OFd6M0drMUJwaWk3UVZ2UWo2L1h1N1ROSzBjT2dZPSJ9',
+                    'Bearer',
+                    86399
+                );
