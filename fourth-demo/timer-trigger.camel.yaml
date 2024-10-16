@@ -8,4 +8,10 @@
       parameters:
         timerName: timer-one
         repeatCount: "1"
-    to: direct:direct-insert-into-table
+      steps:
+        - to:
+            id: to-24da
+            description: Call Sql insert
+            uri: direct
+            parameters:
+              name: direct-insert-into-table
