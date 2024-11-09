@@ -1,0 +1,29 @@
+- route:
+    id: route-e4b7
+    nodePrefixId: route-511
+    from:
+      id: from-6b5d
+      description: Timer Trigger
+      uri: timer
+      parameters:
+        timerName: TimerTrigger
+      steps:
+        - setBody:
+            id: setBody-2833
+            description: Establece el cuerpo del mensaje a un mensaje de bienvenida
+            expression:
+              simple:
+                id: simple-64ad
+                expression: Hola Camel desde la ruta ${routeId}
+        - log:
+            id: log-48f1
+            description: Muestra el estado actual del cuerpo
+            message: ${body}
+        - process:
+            id: process-48fc
+            description: Invoca a un 'Process' que modifica el cuerpo del mensaje
+            ref: MiProcesadorBean
+        - log:
+            id: log-48f0
+            description: Muestra el estado actual del cuerpo
+            message: ${body}
