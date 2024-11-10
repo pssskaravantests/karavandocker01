@@ -1,8 +1,9 @@
 services:
   third-demo-rest:
-    image: third-demo-rest
-    restart: always
-    ports:
-      - "8083:8080"
+    container_name: third-demo-rest
+    image: localhost:5555/karavan/third-demo-rest:211481a
     networks:
-      - karavan
+    - karavan
+    ports:
+    - 8083:8080
+    restart: always
