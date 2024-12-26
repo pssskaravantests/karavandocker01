@@ -1,8 +1,12 @@
 services:
   fernando01:
-    image: fernando01
-    restart: always
-    ports:
-      - "8086:8080"
+    container_name: fernando01
+    image: localhost:5555/karavan/fernando01:d932e7a
     networks:
-      - karavan
+    - karavan
+    ports:
+    - 8086:8080
+    restart: always
+    volumes:
+    - "/home/devel1/karavan-tests/inbox:/var/karavan/inbox"    
+    - "/home/devel1/karavan-tests/outbox:/var/karavan/outbox"   
