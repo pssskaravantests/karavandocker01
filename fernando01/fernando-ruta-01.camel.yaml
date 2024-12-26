@@ -17,3 +17,6 @@
             uri: log
             parameters:
               loggerName: file-conmtent-logger
+              showAllProperties: true
+              showBody: true
+              showBodyType: true
