@@ -8,7 +8,8 @@
       parameters:
         directoryName: /var/karavan/inbox
         charset: UTF-8
-        fileName: "*.json"
+        fileName: test01.json
+        delete: true
       steps:
         - to:
             id: to-7678
