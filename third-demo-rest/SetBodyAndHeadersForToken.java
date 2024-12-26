@@ -15,7 +15,7 @@ public class SetBodyAndHeadersForToken implements Processor {
         String companyCredentials = exchange.getProperty("companyCredentials").toString();
         
         // Establecer el fragmento de enlace
-        String linkFragment = "&grant_type=urn:ietf:params:oauth:grant-type:saml2-bearer&assertion=";
+        String linkFragment = "&grant_type=urn:ietf:params:oauth:grant-type:saml2-bearer&user_id=SF_EC_ROM&assertion=";
 
         // Obtener el cuerpo del mensaje como objeto
         Object body = exchange.getIn().getBody();
