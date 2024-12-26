@@ -1,0 +1,18 @@
+- route:
+    id: route-8cc3
+    nodePrefixId: route-bc9
+    from:
+      id: from-3ac9
+      description: Read File
+      uri: file
+      parameters:
+        directoryName: /var/karavan/inbox
+        charset: UTF-8
+        fileName: "*.json"
+      steps:
+        - to:
+            id: to-7678
+            description: Log File Content
+            uri: log
+            parameters:
+              loggerName: file-conmtent-logger
