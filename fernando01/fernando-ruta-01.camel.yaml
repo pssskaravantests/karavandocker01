@@ -11,12 +11,9 @@
         fileName: test01.json
         delete: true
       steps:
-        - to:
-            id: to-7678
-            description: Log File Content
-            uri: log
-            parameters:
-              loggerName: file-conmtent-logger
-              showAllProperties: true
-              showBody: true
-              showBodyType: true
+        - log:
+            id: log-87e5
+            message: ${body}
+            logName: logger
+        - process:
+            id: process-f95b
