@@ -1,0 +1,110 @@
+- route:
+    id: error-handling-example-v1
+    from:
+      id: from-2927
+      uri: timer
+      parameters:
+        timerName: tick?period=5000
+      steps:
+        - log:
+            id: log-d53c
+            message: Inicio del proceso
+        - doTry:
+            id: doTry-2f98
+            doCatch:
+              - id: doCatch-9beb
+                exception: java.lang.Exception
+                steps:
+                  - log:
+                      id: log-2f1d
+                      message: >-
+                        ERROR: Se produjo una excepción en el proceso:
+                        ${exception.message}
+                  - to:
+                      id: to-19cd
+                      uri: direct
+                      parameters:
+                        name: handleGlobalError
+            steps:
+              - process:
+                  "0": "#"
+                  "1": c
+                  "2": l
+                  "3": a
+                  "4": s
+                  "5": s
+                  "6": ":"
+                  "7": c
+                  "8": o
+                  "9": m
+                  "10": .
+                  "11": e
+                  "12": x
+                  "13": a
+                  "14": m
+                  "15": p
+                  "16": l
+                  "17": e
+                  "18": .
+                  "19": M
+                  "20": "y"
+                  "21": P
+                  "22": r
+                  "23": o
+                  "24": c
+                  "25": e
+                  "26": s
+                  "27": s
+                  "28": o
+                  "29": r
+                  id: process-b54f
+              - to:
+                  id: to-c758
+                  uri: https
+                  parameters:
+                    httpUri: api.critical-service.com/data
+              - doTry:
+                  id: doTry-763f
+                  doCatch:
+                    - id: doCatch-c2ef
+                      exception: java.net.SocketTimeoutException
+                      steps:
+                        - log:
+                            id: log-4465
+                            message: >-
+                              WARNING: Timeout en la segunda llamada HTTP, se
+                              omite.
+                    - id: doCatch-340b
+                      exception: >-
+                        org.apache.camel.http.common.HttpOperationFailedException
+                      steps:
+                        - log:
+                            id: log-18d9
+                            message: >-
+                              ERROR: Fallo en autenticación en segunda llamada,
+                              se omite.
+                  steps:
+                    - to:
+                        id: to-18fa
+                        uri: https
+                        parameters:
+                          httpUri: api.noncritical-service.com/optional
+        - log:
+            id: log-7a6e
+            message: Fin del proceso
+- route:
+    id: handle-global-error
+    from:
+      id: from-2a3d
+      uri: direct
+      parameters:
+        name: handleGlobalError
+      steps:
+        - log:
+            id: log-0e31
+            message: Ejecutando tratamiento de error global...
+        - to:
+            id: to-01ea
+            uri: log
+            parameters:
+              loggerName: error?level=ERROR
