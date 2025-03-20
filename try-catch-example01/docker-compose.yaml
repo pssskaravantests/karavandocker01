@@ -1,0 +1,8 @@
+services:
+  try-catch-example01:
+    image: try-catch-example01
+    restart: always
+    ports:
+      - "8087:8080"
+    networks:
+      - karavan

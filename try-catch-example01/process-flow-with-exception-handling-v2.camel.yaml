@@ -1,0 +1,101 @@
+- route:
+    id: process-flow-with-exception-handling-v2
+    nodePrefixId: route-001
+    from:
+      id: from-001
+      uri: direct
+      parameters:
+        name: process-flow
+      steps:
+        - doTry:
+            id: try-block-001
+            doCatch:
+              - id: catch-all-exceptions
+                exceptions:
+                  - java.lang.Throwable
+                steps:
+                  - to:
+                      id: call-error-subprocess
+                      uri: direct
+                      parameters:
+                        name: error-subprocess
+                  - stop:
+                      id: stop-on-error
+            doFinally:
+              id: doFinally-e3f4
+              log:
+                id: log-finally
+                message: Finalizando el bloque try/catch principal
+                loggingLevel: INFO
+            steps:
+              - to:
+                  id: https-call-1
+                  uri: https
+                  parameters:
+                    httpUri: >-
+                      api.example.com/important-endpoint?httpMethod=GET&connectionRequestTimeout=10000&socketTimeout=10000
+              - process:
+                  id: java-processor-001
+                  ref: MyCustomProcessor
+              - doTry:
+                  id: try-block-https-2
+                  doCatch:
+                    - id: catch-https-2-errors
+                      exceptions:
+                        - java.lang.Throwable
+                      steps:
+                        - log:
+                            id: log-https-2-error
+                            message: >-
+                              Error en la segunda llamada HTTPS (no crítica):
+                              ${exception.message}
+                            loggingLevel: ERROR
+                  steps:
+                    - to:
+                        id: https-call-2
+                        uri: https
+                        parameters:
+                          httpUri: >-
+                            api.optional.com/secondary-endpoint?httpMethod=POST&connectionRequestTimeout=5000&socketTimeout=5000&authenticationPreemptive=true&httpClientConfigurer=myHttpClientConfigurer
+        - log:
+            id: log-success
+            message: Flujo completado con éxito
+            loggingLevel: INFO
+        - to:
+            id: final-destination
+            uri: mock
+            parameters:
+              name: result
+- route:
+    id: error-subprocess
+    nodePrefixId: error-route-001
+    from:
+      id: error-from-001
+      uri: direct
+      parameters:
+        name: error-subprocess
+      steps:
+        - log:
+            id: log-error-subprocess
+            message: "Error crítico detectado: ${exception.message}"
+            loggingLevel: ERROR
+        - setBody:
+            id: set-email-body
+            expression:
+              simple:
+                id: simple-4650
+                expression: |-
+                  Se ha producido un error en el flujo: ${exception.message}
+                  Stacktrace: ${exception.stacktrace}
+        - to:
+            id: send-error-email
+            uri: smtp
+            parameters:
+              host: "smtp:"
+              port: >-
+                //smtp.example.com?to=admin@example.com&from=system@example.com&subject=Error
+                en el proceso
+        - log:
+            id: log-error-handled
+            message: Error manejado y notificado por email
+            loggingLevel: INFO
