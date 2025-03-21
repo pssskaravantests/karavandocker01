@@ -1,0 +1,21 @@
+- route:
+    id: main-process
+    from:
+      id: from-ea6d
+      uri: direct
+      parameters:
+        name: start
+      steps:
+        - doTry:
+            id: doTry-0737
+- route:
+    id: error-handler
+    from:
+      id: from-2ad3
+      uri: direct
+      parameters:
+        name: errorHandler
+      steps:
+        - log:
+            id: log-792c
+            message: ${body}

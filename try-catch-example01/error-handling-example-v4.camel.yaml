@@ -1,0 +1,51 @@
+- route:
+    id: process-flow-with-exception-handling-v3
+    nodePrefixId: route-001
+    from:
+      id: from-001
+      uri: timer
+      parameters:
+        timerName: start?period=10000
+      steps:
+        - doTry:
+            id: try-block-001
+            doCatch:
+              - id: catch-all-exceptions
+                exceptions:
+                  - java.lang.Throwable
+                steps:
+                  - log:
+                      id: log-error
+                      message: "Error detectado: ${exception.message}"
+                      loggingLevel: ERROR
+                  - setBody:
+                      id: set-error-response
+                      expression:
+                        simple:
+                          id: simple-f397
+                          expression: "{ \"error\": \"An error occurred\" }"
+                  - setHeader:
+                      id: set-error-code
+                      name: CamelHttpResponseCode
+                      expression:
+                        simple:
+                          id: simple-d525
+                          expression: "500"
+                  - stop:
+                      id: stop-on-error
+            doFinally:
+              id: doFinally-4dc4
+              log:
+                id: log-finally
+                message: Finalizando el bloque try/catch
+                loggingLevel: INFO
+            steps:
+              - to:
+                  id: https-call-1
+                  uri: https
+                  parameters:
+                    httpUri: >-
+                      api.example.com/important-endpoint?httpMethod=GET&connectionRequestTimeout=10000&socketTimeout=10000
+              - process:
+                  id: java-processor-001
+                  ref: MyCustomProcessor
