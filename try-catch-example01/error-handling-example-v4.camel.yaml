@@ -13,32 +13,74 @@
               - id: catch-all-exceptions
                 exceptions:
                   - java.lang.Throwable
+                  - java.io.IOException
                 steps:
-                  - log:
-                      id: log-error
-                      message: "Error detectado: ${exception.message}"
-                      loggingLevel: ERROR
-                  - setBody:
-                      id: set-error-response
-                      expression:
-                        simple:
-                          id: simple-f397
-                          expression: "{ \"error\": \"An error occurred\" }"
-                  - setHeader:
-                      id: set-error-code
-                      name: CamelHttpResponseCode
-                      expression:
-                        simple:
-                          id: simple-d525
-                          expression: "500"
-                  - stop:
-                      id: stop-on-error
+                  - choice:
+                      id: choice-a761
+                      when:
+                        - id: when-f7d1
+                          expression:
+                            simple:
+                              id: simple-0590
+                              expression: >-
+                                ${exception} instanceof
+                                T[java.net.SocketTimeoutException]
+                          steps:
+                            - log:
+                                id: log-0fc4
+                                message: >-
+                                  Segunda llamada HTTPS falló por timeout:
+                                  ${exception.message}
+                            - log:
+                                id: log-error
+                                message: "Error detectado: ${exception.message}"
+                                loggingLevel: ERROR
+                            - setBody:
+                                id: set-error-response
+                                expression:
+                                  simple:
+                                    id: simple-f397
+                                    expression: "{ \"error\": \"An error occurred\" }"
+                            - setHeader:
+                                id: set-error-code
+                                name: CamelHttpResponseCode
+                                expression:
+                                  simple:
+                                    id: simple-d525
+                                    expression: "500"
+                        - id: when-84a5
+                          expression:
+                            simple:
+                              id: simple-05fa
+                              expression: ${exception} instanceof T[java.io.IOException]
+                          steps:
+                            - log:
+                                id: log-4e06
+                                message: >-
+                                  Segunda llamada HTTPS falló por IO:
+                                  ${exception.message}
+                      otherwise:
+                        id: otherwise-1eee
+                        steps:
+                          - log:
+                              id: log-7add
+                              message: >-
+                                Segunda llamada HTTPS falló por error genérico:
+                                ${exception.message}
             doFinally:
               id: doFinally-4dc4
-              log:
-                id: log-finally
-                message: Finalizando el bloque try/catch
-                loggingLevel: INFO
+              steps:
+                - log:
+                    id: log-finally
+                    message: Finalizando el bloque try/catch
+                    loggingLevel: INFO
+                - to:
+                    id: to-0787
+                    uri: direct
+                    parameters:
+                      name: errorHandler
+                - stop:
+                    id: stop-on-error
             steps:
               - to:
                   id: https-call-1
@@ -49,3 +91,14 @@
               - process:
                   id: java-processor-001
                   ref: MyCustomProcessor
+- route:
+    id: error-handler
+    from:
+      id: from-2ad3
+      uri: direct
+      parameters:
+        name: errorHandler
+      steps:
+        - log:
+            id: log-792c
+            message: ${body}
