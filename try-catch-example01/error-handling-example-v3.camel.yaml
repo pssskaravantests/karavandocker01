@@ -1,0 +1,140 @@
+- route:
+    id: error-handling-example-v3
+    from:
+      id: from-4cc6
+      uri: timer
+      parameters:
+        timerName: tick?period=5000
+      steps:
+        - log:
+            id: log-3836
+            message: Inicio del proceso
+        - doTry:
+            id: doTry-eeaa
+            doCatch:
+              - id: doCatch-ff09
+                exception: java.lang.Exception
+                steps:
+                  - log:
+                      id: log-05e0
+                      message: >-
+                        ERROR: Se produjo una excepción en el proceso principal:
+                        ${exception.message}
+                  - to:
+                      id: to-447b
+                      uri: direct
+                      parameters:
+                        name: handleGlobalError
+            doFinally:
+              id: doFinally-e5be
+              steps:
+                - log:
+                    id: log-9a4b
+                    message: Proceso finalizado, con o sin errores.
+            steps:
+              - process:
+                  "0": "#"
+                  "1": c
+                  "2": l
+                  "3": a
+                  "4": s
+                  "5": s
+                  "6": ":"
+                  "7": c
+                  "8": o
+                  "9": m
+                  "10": .
+                  "11": e
+                  "12": x
+                  "13": a
+                  "14": m
+                  "15": p
+                  "16": l
+                  "17": e
+                  "18": .
+                  "19": M
+                  "20": "y"
+                  "21": P
+                  "22": r
+                  "23": o
+                  "24": c
+                  "25": e
+                  "26": s
+                  "27": s
+                  "28": o
+                  "29": r
+                  id: process-c89b
+              - to:
+                  id: to-0218
+                  uri: https
+                  parameters:
+                    httpUri: api.critical-service.com/data
+              - doTry:
+                  id: doTry-e95e
+                  doCatch:
+                    - id: doCatch-b0a2
+                      exception: java.lang.Exception
+                      steps:
+                        - choice:
+                            id: choice-44b3
+                            when:
+                              - id: when-855b
+                                expression:
+                                  simple:
+                                    id: simple-5507
+                                    expression: >-
+                                      ${exception} contains
+                                      'SocketTimeoutException'
+                                steps:
+                                  - log:
+                                      id: log-9cf4
+                                      message: >-
+                                        WARNING: Timeout en la segunda llamada
+                                        HTTP, se omite.
+                              - id: when-6964
+                                expression:
+                                  simple:
+                                    id: simple-2c44
+                                    expression: >-
+                                      ${exception} contains
+                                      'HttpOperationFailedException'
+                                steps:
+                                  - log:
+                                      id: log-2a05
+                                      message: >-
+                                        ERROR: Fallo en autenticación en segunda
+                                        llamada, se omite.
+                              - id: when-5014
+                                expression:
+                                  groovy:
+                                    id: groovy-0ba0
+                                otherwise:
+                                  steps:
+                                    - log: >-
+                                        ERROR: Excepción inesperada en la
+                                        segunda llamada HTTP.
+                  steps:
+                    - to:
+                        id: to-1379
+                        uri: https
+                        parameters:
+                          httpUri: api.noncritical-service.com/optional
+        - log:
+            id: log-e690
+            message: Fin del proceso
+- route:
+    id: handle-global-error
+    from:
+      id: from-9c7f
+      uri: direct
+      parameters:
+        name: handleGlobalError
+      steps:
+        - log:
+            id: log-4f2a
+            message: Ejecutando tratamiento de error global...
+        - to:
+            id: to-3be5
+            uri: log
+            parameters:
+              loggerName: error?level=ERROR
