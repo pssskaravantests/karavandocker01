@@ -1,30 +1,30 @@
 - route:
     id: inject-json-to-activemq
     from:
-      id: from-e264
+      id: from-548c
       uri: timer
       parameters:
         timerName: inject?repeatCount=1
       steps:
         - log:
-            id: log-0537
+            id: log-fe62
             message: Starting JSON injection...
         - setBody:
-            id: setBody-59b2
+            id: setBody-909e
             expression:
               constant:
-                id: constant-d6cd
+                id: constant-06ca
                 expression: |
                   {
                     "data1": "01",
                     "data2": "02"
                   }
         - to:
-            id: to-feee
-            uri: activemq
+            id: to-ec82
+            uri: jms
             parameters:
               destinationType: queue
-              destinationName: data001
+              destinationName: data001?username=artemis&password=artemis
         - log:
-            id: log-6fe9
+            id: log-956d
             message: "JSON sent to ActiveMQ queue: data001"
