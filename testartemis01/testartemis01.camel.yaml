@@ -14,11 +14,113 @@
             expression:
               constant:
                 id: constant-587d
-                expression: |
+                expression: |-
                   {
-                    "data1": "01",
-                    "data2": "02"
+                      "lastName": "Abadi",
+                      "city": "Jakarta",
+                      "roleID": "LEARNING_USER",
+                      "criteria": null,
+                      "hasAccess": "Yes",
+                      "profileStatus": "ACTIVE",
+                      "notActive": "no",
+                      "totalCount": null,
+                      "superField": "jkusuma",
+                      "domainID": "10001",
+                      "selfReg": "N",
+                      "accountID": null,
+                      "jobPosID": "Management & Planning (50070999)",
+                      "regionID": "Manufacturing (MANU)",
+                      "personExternalID": "sabadi",
+                      "compID": null,
+                      "cntry": "ID",
+                      "empStatID": "",
+                      "nativeDeeplinkUser": "No",
+                      "state": "",
+                      "addr": "Kompleks Kelapa Gading Indah Kelapa Gading Barat",
+                      "locked": "No",
+                      "hireDate": "1483228800000",
+                      "empTypID": "",
+                      "orgID": "Production ID (5000124)",
+                      "jobLocID": "Jakarta (4700-4721)",
+                      "studentID": "sabadi",
+                      "firstName": "Setio",
+                      "personGUID": "5358074DD8EF4821B7267937D552F4C3",
+                      "emailAddr": "Setio.Abadi@bestrunsap.com",
+                      "fulltime": "Yes",
+                      "middleName": null,
+                      "postal": "49513",
+                      "posNumID": "",
+                      "termDate": null,
+                      "regularTempID": ""
                   }
+        - script:
+            id: script-62ab
+            description: Script Groovy
+            expression:
+              groovy:
+                id: groovy-e47d
+                expression: >-
+                  import groovy.json.JsonSlurper
+
+                  import groovy.json.JsonOutput
+
+                  import java.text.SimpleDateFormat
+
+                  import java.util.Date
+
+                  import java.util.TimeZone
+
+
+                  String epochToISO(String epochMillisStr) {
+                      long epochMillis = epochMillisStr.toLong() // Convertir String a long
+                      SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS")
+                      isoFormat.setTimeZone(TimeZone.getTimeZone("UTC")) // Ajuste a UTC
+                      return isoFormat.format(new Date(epochMillis))
+                  }
+
+
+                  // Obtener el body actual y almacenarlo en una propiedad
+
+                  def body = exchange.getIn().getBody(String)
+
+                  exchange.setProperty("savedBody", body)
+                   
+                  // Parsear el JSON
+
+                  def json = new JsonSlurper().parseText(body)
+                   
+                   
+                  // Extraer los valores necesarios
+
+                  def studentData = [
+                      studentId: json.studentID,
+                      name: json.firstName,
+                      surname: json.lastName,
+                      roleID: json.roleID,
+                      hireDate: json.hireDate,
+                      hireDateISO: epochToISO(json.hireDate)
+                  ]
+                   
+                  // Almacenar algunos datos como propiedad par asu utilización
+                  en futuros pasos 
+
+                  exchange.setProperty("studentId", json.studentID)
+
+                  exchange.setProperty("hireDateISO", epochToISO(json.hireDate))
+
+
+                  // Convertir a JSON y establecer como nuevo body
+
+                  exchange.getIn().setBody(JsonOutput.toJson(studentData))
+        - to:
+            id: to-2960
+            uri: log
+            parameters:
+              showAll: true
+              showAllProperties: true
+              showCaughtException: true
+              showException: true
+              loggerName: logAll01
         - to:
             id: to-eef1
             uri: activemq
